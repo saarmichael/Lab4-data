@@ -58,7 +58,7 @@ def plot_spikes(signal, spike_times, freq, window_size=0.002):
         # plot the points
         ax1.scatter(window_time[max_index], max_value, color='red', edgecolors='black', alpha=0.5)
         ax1.scatter(window_time[min_index], min_value, color='red', edgecolors='black', alpha=0.5)
-        ax1.scatter(window_time[max_after_min_index], max_value_after_min, color='red', edgecolors='black', alpha=0.5)
+        ax1.scatter(window_time[max_after_min_index], max_value_after_min, color='red', edgecolors='black', alpha=0.5, s=20)
     sample_points = np.array(sample_points)
     # scatter the sample_points on the plot
     # second subplot
