@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def spike_detection(signal, freq):
+def spike_detection(signal, freq, to_plot=False):
     # function that detects spikes in a signal and returns an array of the times of the spikes
     # the signal is a 1D array of voltage values
 
     # define threshold and minISI
-    threshold = -50 # in microvolts
+    threshold = -70 # in microvolts
     minISI = 4 # in ms
 
     # find the times of the spikes (the spikes are negative, BELOW the threshold)
@@ -27,7 +27,8 @@ def spike_detection(signal, freq):
     spike_times = np.array(spike_times)/freq
     time = np.arange(0, len(signal)/freq, 1/freq)
     # plot the signal and scatter the spike times
-    plt.plot(time, signal, color='black')
-    plt.scatter(spike_times, spike_values, color='red')
-    plt.show()
+    if to_plot:
+        plt.plot(time, signal, color='black')
+        plt.scatter(spike_times, spike_values, color='red')   
+        plt.show()
     return spike_times

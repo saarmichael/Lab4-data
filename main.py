@@ -1,5 +1,6 @@
 from plot_signal import plot_signal
 from spike_detection import spike_detection
+from plot_spikes import plot_spikes
 
 # import the data from .mat files
 import scipy.io as sio
@@ -19,12 +20,12 @@ spk_move_freq       = sio.loadmat('CSPK_Move.mat')['sampling_freq'][0][0]
 # plot the move signals
 # plot_signal(raw_move, raw_move_freq, lfp_move, lfp_move_freq, spk_move, spk_move_freq)
 # plot only the first 10th of a second of the still signals
-divider = 12
+divider = 1
 condition = 'Still'
 #plot_signal(raw_still[:int(raw_still_freq/divider)], raw_still_freq, lfp_still[:int(lfp_still_freq/divider)], lfp_still_freq, spk_still[:int(spk_still_freq/divider)], spk_still_freq, condition=condition)
 condition = 'Move'
 #plot_signal(raw_move[:int(raw_move_freq/divider)], raw_move_freq, lfp_move[:int(lfp_move_freq/divider)], lfp_move_freq, spk_move[:int(spk_move_freq/divider)], spk_move_freq, condition=condition)
 
 # detect spikes in the still signals
-detected = spike_detection(spk_move[:int(spk_move_freq/divider)], spk_move_freq)
-print(detected)
+detected = spike_detection(spk_move[:int(spk_move_freq/divider)], spk_move_freq, False)
+plot_spikes( spk_move[:int(spk_move_freq/divider)], detected, freq = spk_move_freq)
