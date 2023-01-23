@@ -10,8 +10,10 @@ def plot_spikes(signal, spike_times, freq, window_size=0.002):
     window_time = np.arange(-window_size/2, window_size/2, 1/freq)
     windows = []
     fig = plt.figure()
+    fig.suptitle(f'{window_size*1000} ms windows around spikes')
     # subplot 1
     ax1 = fig.add_subplot(1, 2, 1)
+    ax1.set_title('All windows with the average spike +1 std')
 
     for i in range(len(spike_times)):
         # get the time of the spike
@@ -35,6 +37,8 @@ def plot_spikes(signal, spike_times, freq, window_size=0.002):
     # plot the average window and one standard deviation
     ax1.plot(window_time, avg_window, color='black', linewidth=4)
     ax1.fill_between(window_time, avg_window-std_window, avg_window+std_window, color='grey', alpha=0.3)
+    ax1.set_xlabel('time (s)')
+    ax1.set_ylabel('voltage (uV)')
 
     
     # collect three points from each window and plot them on a 3D plot
@@ -61,11 +65,12 @@ def plot_spikes(signal, spike_times, freq, window_size=0.002):
     # scatter the points in small size
     # plot the points in 3D in small size and with border around them
     ax2 = fig.add_subplot(1, 2, 2, projection='3d')
+    ax2.set_title('3D scatter of three measurements from each window')
     ax2.scatter(sample_points[:, 0], sample_points[:, 1], sample_points[:, 2], color='red', edgecolors='black', alpha=0.5)
     # add labels to the axes
-    ax2.set_xlabel('max value')
-    ax2.set_ylabel('min value')
-    ax2.set_zlabel('max value after min')
+    ax2.set_xlabel('max value (uV)')
+    ax2.set_ylabel('min value (uV)')
+    ax2.set_zlabel('max value after min (uV)')
     
 
     plt.show()
