@@ -39,7 +39,7 @@ plot_signal(raw_move[:int(raw_move_freq/divider)], raw_move_freq, lfp_move[:int(
 detected = spike_detection(spk_move[:int(spk_move_freq/divider)], spk_move_freq, False)
 
 # BONUS function 2:
-plot_spikes( spk_move[:int(spk_move_freq/divider)], detected, freq = spk_move_freq)
+plot_spikes(spk_move[:int(spk_move_freq/divider)], detected, freq=spk_move_freq)
 
 # function 3:
 # calculate and plot the firing rate of the neuron in each time window
@@ -47,4 +47,4 @@ firing_rate = firingRate(detected, spk_move_freq, len(spk_move[:int(spk_move_fre
 
 # function 4:
 # LFP spectrum analysis
-LFP_spectrum(spk_move, spk_move_freq)
+LFP_spectrum(lfp_move, lfp_move_freq)
