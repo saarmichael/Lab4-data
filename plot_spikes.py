@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
+
 
 def plot_spikes(signal, spike_times, freq, window_size=0.002):
     # function that plots all the windows around the spikes
@@ -64,6 +66,7 @@ def plot_spikes(signal, spike_times, freq, window_size=0.002):
     # second subplot
     # scatter the points in small size
     # plot the points in 3D in small size and with border around them
+    #ax2 = Axes3D(fig)
     ax2 = fig.add_subplot(1, 2, 2, projection='3d')
     ax2.set_title('3D scatter of three measurements from each window')
     ax2.scatter(sample_points[:, 0], sample_points[:, 1], sample_points[:, 2], color='red', edgecolors='black', alpha=0.5)

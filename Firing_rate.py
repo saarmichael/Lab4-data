@@ -10,7 +10,7 @@ def firingRate(spike_times, sampling_rate, recording_time):
     # firing_rate is the firing rate of the neuron in Hz
     # calculate the firing rate of the neuron, using spike train and non-overlapping windows
     # the window size is 0.1 seconds
-    window_size = 0.1
+    window_size = 0.05
     # calculate the number of windows
     num_windows = int(recording_time/window_size)
     # calculate the number of spikes in each window
