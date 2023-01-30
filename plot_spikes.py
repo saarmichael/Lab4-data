@@ -23,11 +23,13 @@ def plot_spikes(signal, spike_times, freq, window_size=0.002):
         # get the window around the spike
         window = signal[spike_index-step:spike_index+step]
         # append the window to the list of windows
-        windows.append(window)
-        # generate random color for the window
-        color = np.random.rand(3,)
-        # plot the window
-        ax1.plot(window_time, window, color=color, linewidth=1)
+        if len(window) == len(window_time):
+            windows.append(window)
+            # generate random color for the window
+            color = np.random.rand(3,)
+            # plot the window
+            # check if the window is the same size as the window_time
+            ax1.plot(window_time, window, color=color, linewidth=1)
     # show
 
     # calculate the average window and one standard deviation
@@ -39,6 +41,9 @@ def plot_spikes(signal, spike_times, freq, window_size=0.002):
     ax1.fill_between(window_time, avg_window-std_window, avg_window+std_window, color='grey', alpha=0.3)
     ax1.set_xlabel('time (s)')
     ax1.set_ylabel('voltage (uV)')
+    # add text to the plot with the average spike amplitude and the std
+    ax1.text(0.15, 0.20, f'avg spike peak: {np.max(avg_window):.2f} uV', transform=ax1.transAxes, fontsize=10, verticalalignment='bottom')
+    ax1.text(0.15, 0.15, f'spikes peak std: {np.max(std_window):.2f} uV', transform=ax1.transAxes, fontsize=10, verticalalignment='bottom')
 
     
     # collect three points from each window and plot them on a 3D plot

@@ -1,3 +1,4 @@
+from min_ISI import min_ISI
 from plot_signal import plot_signal
 from spike_detection import spike_detection
 from plot_spikes import plot_spikes
@@ -22,10 +23,12 @@ spk_move_freq       = sio.loadmat('CSPK_Move.mat')['sampling_freq'][0][0]
 # plot only the first 10th of a second of the still signals
 divider = 1
 condition = 'Still'
-#plot_signal(raw_still[:int(raw_still_freq/divider)], raw_still_freq, lfp_still[:int(lfp_still_freq/divider)], lfp_still_freq, spk_still[:int(spk_still_freq/divider)], spk_still_freq, condition=condition)
-condition = 'Move'
-#plot_signal(raw_move[:int(raw_move_freq/divider)], raw_move_freq, lfp_move[:int(lfp_move_freq/divider)], lfp_move_freq, spk_move[:int(spk_move_freq/divider)], spk_move_freq, condition=condition)
+# plot_signal(raw_still[:int(raw_still_freq/divider)], raw_still_freq, lfp_still[:int(lfp_still_freq/divider)], lfp_still_freq, spk_still[:int(spk_still_freq/divider)], spk_still_freq, condition=condition)
+# plot_signal(raw_move[:int(raw_move_freq/divider)], raw_move_freq, lfp_move[:int(lfp_move_freq/divider)], lfp_move_freq, spk_move[:int(spk_move_freq/divider)], spk_move_freq)
+
 
 # detect spikes in the still signals
-detected = spike_detection(spk_move[:int(spk_move_freq/divider)], spk_move_freq, False)
-plot_spikes( spk_move[:int(spk_move_freq/divider)], detected, freq = spk_move_freq)
+detected = spike_detection(spk_move[3*int(spk_move_freq/divider):4*int(spk_move_freq/divider)], spk_move_freq, True, 'Move')
+#plot_spikes( spk_move, detected, freq = spk_move_freq)
+detected = spike_detection(spk_still[3*int(spk_still_freq/divider):4*int(spk_still_freq/divider)], spk_still_freq, True, 'Still')
+#plot_spikes( spk_still, detected, freq = spk_still_freq)
